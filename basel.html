@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Football Match History</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-image: url('C:\\Users\\omarn\\Pictures\\Screenshots\\Screenshot 2023-12-22 220746.png');
+            background-size: cover;
+            background-position: center;
+            animation: gradientAnimation 10s infinite alternate; /* Added gradient animation */
+        }
+
+        @keyframes gradientAnimation {
+            0% {
+                background-image: url('C:\\Users\\omarn\\Pictures\\Screenshots\\Screenshot 2023-12-22 220746.png');
+            }
+            50% {
+                background-image: url('C:\\Users\\omarn\\Pictures\\Screenshots\\Screenshot 2023-12-22 220746.png');
+            }
+            100% {
+                background-image: url('C:\\Users\\omarn\\Pictures\\Screenshots\\Screenshot 2023-12-22 220746.png');
+            }
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 100px auto;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transform-origin: center bottom; /* Added transform origin for container animation */
+            animation: fadeInUp 1s ease-out, scaleUp 0.5s ease-out 1s forwards; /* Added scaleUp animation */
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+            animation: fadeIn 1s ease-out;
+            border: 2px solid #333;
+            padding: 10px;
+            border-radius: 8px;
+            background-color: #fff;
+        }
+
+        .team-logo {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 20px;
+            object-fit: cover;
+            border-radius: 50%;
+            transition: transform 0.5s ease;
+        }
+
+        .match-history {
+            margin-top: 20px;
+            padding: 10px;
+            border: 2px solid #333;
+            border-radius: 8px;
+            background-color: rgba(255, 255, 255, 0.8);
+            max-height: 300px;
+            overflow-y: auto;
+            opacity: 0;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            animation: slideIn 1s ease-out 0.5s forwards; /* Added delay to slideIn animation */
+        }
+
+        .team-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 1s forwards; /* Added delay to fadeIn animation */
+        }
+
+        .team-button {
+            flex-grow: 1;
+            padding: 10px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .team-button:hover {
+            background-color: #45a049;
+        }
+
+        /* Custom keyframe animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes scaleUp {
+            from {
+                transform: scale(0);
+            }
+            to {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Football Match History</h1>
+        <img src="" alt="Team Logo" id="teamLogo" class="team-logo">
+        <div class="match-history" id="matchHistory">
+            <!-- Content for the selected team's match history will be displayed here -->
+        </div>
+        <div class="team-buttons">
+            <button class="team-button" onclick="loadTeam('Team 1')">Team 1</button>
+            <button class="team-button" onclick="loadTeam('Team 2')">Team 2</button>
+            <!-- Add more buttons for additional teams as needed -->
+        </div>
+
+        <!-- Add the video player here -->
+        <video controls width="100%" src="C:\\Users\\omarn\\Downloads\\Barcelona-vs-Real-Madrid-1-2-Highlights-WISELOADED.COM_.mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <script>
+        const teamLogos = {
+            'Team 1': 'C:\\Users\\omarn\\Pictures\\Screenshots\\Screenshot 2023-12-22 220746.png',
+            'Team 2': 'C:\\Users\\omarn\\Pictures\\Screenshots\\Screenshot 2023-12-23 225704.png',
+            // Add more logos for additional teams as needed
+        };
+
+        const matchHistoryData = {
+            'Team 1': ['Match 1: Team 1 vs Opponent 1', 'Match 2: Team 1 vs Opponent 2'],
+            'Team 2': ['Match 1: Team 2 vs Opponent 1', 'Match 2: Team 2 vs Opponent 2'],
+            // Add more match history data for additional teams as needed
+        };
+
+        function loadTeam(teamName) {
+            const teamLogo = document.getElementById('teamLogo');
+            const matchHistory = document.getElementById('matchHistory');
+            const teamButtons = document.querySelector('.team-buttons');
+
+            // Set team logo with a small zoom-in effect
+            teamLogo.style.transform = 'scale(1.2)';
+            setTimeout(() => {
+                teamLogo.src = teamLogos[teamName];
+                teamLogo.style.transform = 'scale(1)';
+            }, 200);
+
+            // Load match history dynamically with a fade-in effect
+            matchHistory.style.opacity = 0;
+            setTimeout(() => {
+                matchHistory.innerHTML = getMatchHistoryContent(teamName);
+                matchHistory.style.opacity = 1;
+            }, 500);
+
+            // Show the team buttons with a fade-in effect
+            teamButtons.style.opacity = 0;
+            setTimeout(() => {
+                teamButtons.style.opacity = 1;
+            }, 1000);
+        }
+
+        function getMatchHistoryContent(teamName) {
+            // Replace this with your actual match history content
+            const matches = matchHistoryData[teamName] || [];
+            return matches.map(match => `<p>${match}</p>`).join('');
+        }
+
+        // Load initial team and logo (randomly)
+        const teams = Object.keys(teamLogos);
+        const randomTeam = teams[Math.floor(Math.random() * teams.length)];
+        loadTeam(randomTeam);
+    </script>
+
+</body>
+
+</html>

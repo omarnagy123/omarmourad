@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ماتشاتك</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-image: url("C:\\Users\\omarn\\Pictures\\Screenshots\\Screenshot 2023-12-22 220746.png");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            transition: background-color 0.5s ease, background-image 0.5s ease; /* Added transition for background image */
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 100px auto;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.5s ease;
+            animation: fadeInUp 1s ease-out;
+            background-image: url("C:\\Users\\omarn\\Pictures\\Screenshots\\Screenshot 2023-12-22 220746.png");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+            animation: fadeIn 1s ease-out;
+            border: 2px solid #333;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: fadeIn 1s ease-out forwards;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            animation: fadeIn 1s ease-out;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .container:hover {
+            transform: translateY(-5px);
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #282c34;
+            overflow: hidden; /* Prevent background image overflow */
+        }
+
+        .football {
+            font-size: 50px;
+            animation: spin 5s linear infinite;
+            color: #e44d26;
+            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+            margin-bottom: 20px;
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Style for the "Next" link */
+        a {
+            color: #333;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 10px;
+            transition: color 0.3s ease;
+            font-size: 20px; /* Make the word "Next" big */
+            padding: 5px 10px; /* Add padding to create a frame around it */
+            border: 2px solid #333; /* Add a border */
+            border-radius: 5px; /* Add border radius for rounded corners */
+            position: absolute; /* Position absolute for top right */
+            top: 10px; /* Adjust top position */
+            right: 10px; /* Adjust right position */
+        }
+
+        a:hover {
+            color: #45a049;
+        }
+
+        /* Advanced styles */
+        button.change-bg {
+            background-color: #3498db;
+            margin-top: 20px;
+        }
+
+        button.change-bg:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="C:\Users\omarn\Desktop\zzzzzzzzzzzz\basel.html">Next</a>
+
+    <div class="container">
+        <h1>Welcome to ماتشاتك</h1>
+        <div class="football">⚽</div>
+
+        <form onsubmit="return validateForm();" method="post">
+            <div class="form-group">
+                <label for="textbox">Username:</label>
+                <input id="textbox" type="text" name="user_name" placeholder="omar" required>
+            </div>
+
+            <div class="form-group">
+                <label for="passbox">Password:</label>
+                <input id="passbox" type="password" name="pass">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input id="email" type="email" name="mail" placeholder="omarmourad@gmail.com" required>
+            </div>
+
+            <button type="submit" name="submit">Login</button>
+            <button type="button" class="change-bg" onclick="changeBackgroundImage()">Change Background Image</button>
+        </form>
+    </div>
+
+    <script>
+        function validateForm() {
+            const emailInput = document.getElementById('email');
+            if (emailInput.value === '') {
+                alert('Please enter an email address.');
+                return false;
+            }
+            return true;
+        }
+
+        function changeBackgroundImage() {
+            const newImageUrl = getRandomImage();
+            document.body.style.backgroundImage = `url("${newImageUrl}")`;
+            document.querySelector('.container').style.backgroundImage = `url("${newImageUrl}")`;
+        }
+
+        function getRandomImage() {
+            // Replace with an array of your image URLs
+            const imageUrls = [
+                'url-to-image-1.jpg',
+                'url-to-image-2.jpg',
+                'url-to-image-3.jpg',
+                // Add more image URLs as needed
+            ];
+
+            const randomIndex = Math.floor(Math.random() * imageUrls.length);
+            return imageUrls[randomIndex];
+        }
+    </script>
+</body>
+
+</html>
